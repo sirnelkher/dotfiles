@@ -1,4 +1,5 @@
 # Global config
+# Hash the known_hosts file to hide the used hosts
 HashKnownHosts yes
 Compression yes
 ForwardAgent yes
@@ -20,5 +21,9 @@ Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.
 # HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521,ecdsa-sha2-nistp384,ecdsa-sha2-nistp256
 
 ControlMaster auto
-ControlPath ~/.ssh/sockets/ssh-%h_%p_%r
+# Use ControlMaster in home dir to prevent leak
+ControlPath ~/.ssh/ssh-%h_%p_%r
 
+# No more key conflict for test network
+Host 192.168.9.*
+    UserKnownHostsFile /dev/null
