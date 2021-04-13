@@ -1,9 +1,0 @@
-#!/bin/bash
-# script to upgrade packages from AUR
-if [ -x $(which yaourt) ]; then
-    yaourt -S $(yaourt -Qmtq)
-else
-    echo "yaourt not found, trying to use pacman!" >&2
-    pacman -S $(pacman -Qmtq)
-fi
-exit
