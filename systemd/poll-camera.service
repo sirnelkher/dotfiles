@@ -1,0 +1,8 @@
+[Unit]
+After=graphical.service
+
+[Service]
+ExecStart=/usr/local/sbin/poll_camera.sh
+
+[Install]
+WantedBy=default.target
