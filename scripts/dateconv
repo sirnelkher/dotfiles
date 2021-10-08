@@ -1,0 +1,3 @@
+#!/bin/bash
+TIMEZONE=$(timedatectl list-timezones|grep -i $1)
+date --date="TZ=\"${TIMEZONE}\" $2"
