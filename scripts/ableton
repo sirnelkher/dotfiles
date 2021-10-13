@@ -1,0 +1,5 @@
+#!/bin/bash
+cd "$HOME/.local/wine/abletonwine/drive_c/ProgramData/Ableton/Live11Suite/Program/"
+WINEPREFIX="$HOME/.local/wine/abletonwine" wine "Ableton Live 11 Suite.exe" 2>/dev/null &
+sleep 10
+sudo renice -n -10 -p $(ps ax|awk '/\\Ableton/{print $1}')

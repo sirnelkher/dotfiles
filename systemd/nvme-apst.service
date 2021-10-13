@@ -5,8 +5,6 @@ Description=Disable NVME APST
 [Service]
 Type=oneshot
 ExecStart=nvme set-feature -f 0x0c -v=0 /dev/nvme0
-#RemainAfterExit=true
-#ExecStop=/opt/foo/teardown-foo.sh
 StandardOutput=journal
 
 [Install]
