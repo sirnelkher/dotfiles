@@ -1,0 +1,22 @@
+# User-defined functions
+# vim:ft=sh
+
+function pgr() {
+    ps axf|grep -i "$@"
+}
+
+function fgr() {
+    fgrep -Ri "$@"
+}
+
+function winetmp {
+    WINEPREFIX=/tmp/tmpwine wine "$@"
+}
+
+# Use your bash customisations via SSH everywhere
+function ssh() {
+  BASH_RC=$(cat ${HOME}/.bashrc ${HOME}/.bash_aliases ${HOME}/.functions  | base64)
+  $(which ssh) -t $@ "echo \"${BASH_RC}\" | base64 --decode > /tmp/${USER}_bashrc; bash --rcfile /tmp/${USER}_bashrc; rm /tmp/${USER}_bashrc"
+}
+
+
