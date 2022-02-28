@@ -43,7 +43,6 @@ set undolevels=1000
 " allow backspacing over indentation, line breaks and insertion start
 set backspace=indent,eol,start
 
-colorscheme monokai
 
 
 
@@ -77,7 +76,7 @@ set statusline+=x%02.B
 "   scroll position percentage
 set statusline+=\ %3.p%%
 
-
+colorscheme desert
 
 " Make frequent typos work.
 command! Q :q
@@ -92,7 +91,7 @@ command! WQAll :wqall
 
 " set <leader> as ű for hungarian keyboards
 let mapleader = "ű"
-nnoremap <c-t>  <Esc>:tabnew<CR>
+nnoremap <C-t>  <Esc>:tabnew<CR>
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
@@ -103,15 +102,26 @@ nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
 
-set pastetoggle=<c-v>
+set pastetoggle=<C-<F7>>
 
 " Make constants readable on projector as well
 highlight Constant ctermbg=black ctermfg=green
 
+" edit vim config in a split
+nnoremap <leader>evf :vsplit  $MYVIMRC<CR>
+" reload vim confiv
+nnoremap <leader>rvf :so $MYVIMRC<CR>
 
 """"""""""""""""""""""""""""""""
 " Functions
 """"""""""""""""""""""""""""""""
+function! IsMachine(hostname)
+    if match(system("hostname"), a:hostname) >= 0
+        return 0
+    else
+        return -1
+endfunction
+
 function! OpenAll(command, pattern_to_position_cursor)
     for f in split(system(a:command .  ' 2>/dev/null | grep -Ev ''[.](swp|pyc|pickle)$'''), "\n")
         execute 'tabe ' . f
@@ -156,3 +166,27 @@ command! -nargs=1 F call Find('<args>')
 command! -nargs=0 FindCurrentWord call Find(expand('<cword>'))
 command! -nargs=0 FCW call Find(expand('<cword>'))
 
+
+""""""""""""""""""""""""""""""""
+" Auto-install vim plugin manager
+""""""""""""""""""""""""""""""""
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+""""""""""""""""""""""""""""""""
+" Plugin list
+""""""""""""""""""""""""""""""""
+silent! call plug#begin()
+    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+call plug#end()
+
+""""""""""""""""""""""""""""""""
+" NERDTree 
+""""""""""""""""""""""""""""""""
+cnoremap <leader>n :NERDTreeFocus<CR>
+"nnoremap <C-n> :NERDTree<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+"nnoremap <C-f> :NERDTreeFind<CR>
