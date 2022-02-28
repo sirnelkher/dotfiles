@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -116,8 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-PATH=$PATH:$HOME/.scripts:/home/sirnelkher/.local/bin
-
 # Set up SSH agent
 if [ -f ~/.ssh/agent.env ] ; then
     . ~/.ssh/agent.env > /dev/null
@@ -132,10 +130,34 @@ else
     ssh-add
 fi
 
-source ~/.functions
-CDPATH=~/git:$CDPATH
+#Add custom functions to shell
+[[ -e ~/.functions ]] && source ~/.functions
 
-#eval $(ssh-agent)
-#for i in $(ls -1 $HOME/.ssh/|grep "^id_"|grep -v "pub$");do ssh-add "$HOME/.ssh/${i}";done
-eval "$(starship init bash)"
+# defaults
+export EDITOR=vim
+export VISUAL=vim
+#export PAGER=less
+export PAGER=batcat
+export SYSTEMD_PAGER=batcat
 
+export PATH=${HOME}/.local/bin:${HOME}/.scripts:$PATH
+export CDPATH=$CDPATH:$HOME/github:${HOME}/git
+
+if [[ -x kubectl ]];then
+    source <(kubectl completion bash)
+    complete -F __start_kubectl kubectl
+    complete -F __start_kubectl k
+fi
+
+[[ -x /usr/bin/keychain ]] && /usr/bin/keychain --nogui --systemd $HOME/.ssh/id_ed25519  $HOME/.ssh/id_rsa $HOME/.ssh/id_ecdsa 2C35FBF4F2317637
+[[ -f $HOME/.keychain/$HOSTNAME-sh ]] && source $HOME/.keychain/$HOSTNAME-sh
+[[ -x gpg-agent ]] && eval $(gpg-agent --daemon)
+
+
+export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/projects
+[[ -x /home/gcsordas/.local/bin/virtualenvwrapper.sh ]] && source /home/gcsordas/.local/bin/virtualenvwrapper.sh
+
+
+
+[[ -x /usr/local/bin/starship ]] && eval "$(starship init bash)"
