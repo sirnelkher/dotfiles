@@ -76,7 +76,7 @@ set statusline+=x%02.B
 "   scroll position percentage
 set statusline+=\ %3.p%%
 
-colorscheme desert
+colorscheme monokai
 
 " Make frequent typos work.
 command! Q :q
@@ -180,7 +180,8 @@ endif
 " Plugin list
 """"""""""""""""""""""""""""""""
 silent! call plug#begin()
-    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+    Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+    Plug 'jreybert/vimagit'
 call plug#end()
 
 """"""""""""""""""""""""""""""""
