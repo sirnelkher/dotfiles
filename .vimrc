@@ -191,3 +191,11 @@ cnoremap <leader>n :NERDTreeFocus<CR>
 "nnoremap <C-n> :NERDTree<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 "nnoremap <C-f> :NERDTreeFind<CR>
+
+""""""""""""""""""""""""""""""""
+" vimagit 
+""""""""""""""""""""""""""""""""
+" Open vimagit pane
+nnoremap <leader>gs :Magit<CR>       " git status"
+" Push to remote
+nnoremap <leader>gP :! git push<CR>  " git Push
