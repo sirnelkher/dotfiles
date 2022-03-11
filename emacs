@@ -1,4 +1,3 @@
-
 (setq custom-file "~/.emacs-custom")
 (load custom-file)
 
@@ -37,7 +36,7 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; Display line numbers
+;; Display line and column numbers
 (global-display-line-numbers-mode)
 (column-number-mode)
 
@@ -70,6 +69,7 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+
 ;; Show available keys after 1 sec for C-x and C-c
 (use-package which-key
   :init (which-key-mode)
@@ -77,7 +77,7 @@
   :config
   (setq which-keyidle-delay 1))
 
-(use-package counse
+(use-package counsel
   :bind (("M-x" . counsel-M-x)
 	 ("C-x b" . counsel-ibuffer)
 	 ("C-x C-f" . counsel-find-file)
@@ -85,6 +85,8 @@
 	 ("C-r" . counsel-minibuffer-history))
   :config
   (setq ivy-initial-inputs-alias nil)) ;;Don't start searches with ^
+
+
 
 ;;;;Org mode configuration
 ;; Enable Org mode
@@ -117,3 +119,8 @@
 ;; YAML
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.y.ml\\'" . yaml-mode))
+
+
+;; auto-open my usual org files
+(find-file "~/.emacs.d/todo.org")
+(find-file "~/.emacs.d/notes.org")
