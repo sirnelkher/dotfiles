@@ -1,0 +1,10 @@
+[gc]
+	reflogExpire = 180.days.ago
+[alias]
+	br = branch
+    ci = commit
+	st = status
+    co = checkout
+	visual = !gitk
+[core]
+	excludesfile = ~/.gitignore
