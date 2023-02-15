@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
 
 # Terminate already running bar instances
-killall -q polybar
+#killall -q polybar
+#
+#if type "xrandr"; then
+#  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+#    MONITOR=$m polybar --reload example &
+#  done
+#else
+#  polybar --reload example &
+#fi
+#
+#echo "Bars launched..."
+
+pkill polybar
 
 export DPI=$(xrdb -query | sed -nE 's/^Xft\.dpi:\s*//p')
 export HEIGHT=$((18 * DPI / 96))
@@ -32,3 +44,7 @@ case $NMONITORS in
         systemd-notify --status="$NMONITORS polybar instances running"
         ;;
 esac
+
+#systemd-notify --ready
+#trap "systemd-notify WATCHDOG=trigger" CHLD
+#wait

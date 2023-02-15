@@ -197,13 +197,17 @@ mode "$mode_system" {
 }
 bindsym $mod+Print mode "$mode_system"
 
-bindsym $mod+l exec --no-startup-id i3exit lock, mode "default"
+bindsym Print exec --no-startup-id flameshot screen -c
+
+#bindsym $mod+l exec --no-startup-id i3exit lock, mode "default" 
+bindsym $mod+l exec i3lock --color=#000000
+#bindsym $mod+l exec i3lock --color=#041d59
 
 exec --no-startup-id /usr/local/sbin/thinkpad-dock.sh
 
 exec sleep 5
 exec_always --no-startup-id /usr/bin/feh --bg-fill /home/sirnelkher/Pictures/Wallpapers-room_com___Sailing_The_Desert_by_Gate-To-Nowhere_1440x900.jpg
-exec_always --no-startup-id setxkbmap hu,us -option 'grp:alt_shift_toggle'
+exec_always --no-startup-id setxkbmap -layout hu,us,us,us,workman -variant ,,dvorak,colemak,workman -option 'grp:alt_shift_toggle'
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id exec nm-applet
 #exec --no-startup-id exec /usr/bin/cadence
@@ -234,4 +238,5 @@ exec sleep 1
 exec --no-startup-id i3-msg 'workspace 10:Mail; exec /usr/bin/thunderbird'
 
 exec_always --no-startup-id /usr/bin/picom -b --config ~/.config/picom/picom.conf
-exec_always --no-startup-id /usr/bin/redshift
+exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
+exec --no-startup-id /usr/bin/redshift
