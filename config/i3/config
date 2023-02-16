@@ -67,6 +67,9 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+bindsym $mod+i focus left
+bindsym $mod+o focus right
+
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
@@ -205,9 +208,9 @@ bindsym $mod+l exec i3lock --color=#000000
 
 exec --no-startup-id /usr/local/sbin/thinkpad-dock.sh
 
-exec sleep 5
+exec sleep 1
 exec_always --no-startup-id /usr/bin/feh --bg-fill /home/sirnelkher/Pictures/Wallpapers-room_com___Sailing_The_Desert_by_Gate-To-Nowhere_1440x900.jpg
-exec_always --no-startup-id setxkbmap -layout hu,us,us,us,workman -variant ,,dvorak,colemak,workman -option 'grp:alt_shift_toggle'
+exec_always --no-startup-id setxkbmap -layout hu,us,us,us -variant ,,workman,colemak -option '' -option 'grp:alt_shift_toggle' -option 'ishift:both_shiftlock'
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id exec nm-applet
 #exec --no-startup-id exec /usr/bin/cadence
