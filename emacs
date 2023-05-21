@@ -6,6 +6,9 @@
 ;; Set up visible bell
 (setq visible-bell t)
 
+(setq tab-width 4)
+(set-language-environment "UTF-8")
+
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			 ("org" . "https://orgmode.org/elpa/")
@@ -81,6 +84,15 @@
 
 (defun dotemacs () (interactive) (switch-to-buffer (find-file-noselect "~/.emacs")))
 (global-set-key (kbd "C-x c") 'dotemacs)
+
+(global-set-key (kbd "C-S-M-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-S-M-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-S-M-<down>") 'shrink-window)
+(global-set-key (kbd "C-S-M-<up>") 'enlarge-window)
+(global-set-key (kbd "C-M-<left>") 'windmove-left)
+(global-set-key (kbd "C-M-<right>") 'windmove-right)
+(global-set-key (kbd "C-M-<down>") 'windmove-down)
+(global-set-key (kbd "C-M-<up>") 'windmove-up)
 
 ;; Visual line mode everywhere, please
 (global-visual-line-mode t)
@@ -313,26 +325,3 @@
 (find-file "~/Documents/emacs/diary/diary.org")
 (defvar journal-dir "~/Documents/emacs/diary/")
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(blink-cursor-mode t)
- '(compilation-message-face 'default)
- '(custom-safe-themes
-   '("47db50ff66e35d3a440485357fb6acb767c100e135ccdf459060407f8baea7b2" "4b0e826f58b39e2ce2829fab8ca999bcdc076dec35187bf4e9a4b938cb5771dc" "8146edab0de2007a99a2361041015331af706e7907de9d6a330a3493a541e5a6" "745d03d647c4b118f671c49214420639cb3af7152e81f132478ed1c649d4597d" "0466adb5554ea3055d0353d363832446cd8be7b799c39839f387abb631ea0995" "5784d048e5a985627520beb8a101561b502a191b52fa401139f4dd20acb07607" "c4063322b5011829f7fdd7509979b5823e8eea2abf1fe5572ec4b7af1dd78519" "1d5e33500bc9548f800f9e248b57d1b2a9ecde79cb40c0b1398dec51ee820daf" "7a7b1d475b42c1a0b61f3b1d1225dd249ffa1abb1b7f726aec59ac7ca3bf4dae" "da186cce19b5aed3f6a2316845583dbee76aea9255ea0da857d1c058ff003546" "0d01e1e300fcafa34ba35d5cf0a21b3b23bc4053d388e352ae6a901994597ab1" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27" "a7b20039f50e839626f8d6aa96df62afebb56a5bbd1192f557cb2efb5fcfb662" default))
- '(highlight-changes-colors '("#FD5FF0" "#AE81FF"))
- '(magit-diff-use-overlays nil)
- '(package-selected-packages
-   '(hydra general ace-window helpful markdown-toc markdownfmt flycheck shfmt flycheck-shfmt auto-complete python-environment py-autopep8 yaml-mode which-key use-package terraform-mode terraform-doc rainbow-delimiters private-diary pdf-tools org-bullets monokai-theme magit evil-collection elpy doom-modeline counsel command-log-mode calfw all-the-icons-dired))
- '(pos-tip-background-color "#FFFACE")
- '(pos-tip-foreground-color "#272822")
- '(weechat-color-list
-   '(unspecified "#272822" "#3C3D37" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
