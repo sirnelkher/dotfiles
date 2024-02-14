@@ -1,0 +1,13 @@
+# XONSH WIZARD START
+xontrib load coreutils fzf-widgets apt_tabcomplete docker_tabcomplete ssh_agent sh output_search hist_navigator gitinfo commands abbrevs argcomplete bashisms free_cwd whole_word_jumping
+# XONSH WIZARD END
+
+$XONSH_CAPTURE_ALWAYS=True
+
+$CDPATH=["github",]
+#execx( $(starship init xonsh) )
+
+import boto3
+# XONSH WEBCONFIG START
+xontrib load bashisms
+# XONSH WEBCONFIG END
