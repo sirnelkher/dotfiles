@@ -101,9 +101,18 @@ vim.cmd("command! WQall :wqall")
 vim.cmd("command! WQAll :wqall")
 
 
-
 -- Install lazy.nvim plugin manager
-require("config.lazy")
+require("config/lazy")
+
+vim.cmd([[colorscheme monokai-pro-classic]])
+local builtin = require("telescope.builtin")
+
+local config = require("treesitter.configs")
+config.setup({
+  ensure_installed = { "lua", "javascript", "typescript" },
+  highlight = { enable = true },
+  indent = { enable = true},
+})
 
 --  Plug 'itchyny/lightline.vim'
 --  Plug 'loctvl842/monokai-pro.nvim'
