@@ -90,7 +90,7 @@ command! WQall :wqall
 command! WQAll :wqall
 
 " set <leader> as ű for hungarian keyboards
-let mapleader = "ű"
+let mapleader = "\\"
 nnoremap <C-t>  <Esc>:tabnew<CR>
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
@@ -180,6 +180,7 @@ endif
 " Plugin list
 """"""""""""""""""""""""""""""""
 silent! call plug#begin()
+    Plug 'ku1ik/vim-monokai'
     Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
     Plug 'jreybert/vimagit'
 call plug#end()

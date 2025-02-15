@@ -1,10 +1,14 @@
 [gc]
 	reflogExpire = 180.days.ago
 [alias]
-	br = branch
+    br = branch
     ci = commit
-	st = status
+    st = status
     co = checkout
-	visual = !gitk
+    visual = !gitk
+    adog = log --all --decorate --oneline --graph
 [core]
 	excludesfile = ~/.gitignore
+[user]
+	email = sirnelkher@gmail.com
+	name = Gergely Csordas
