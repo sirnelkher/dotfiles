@@ -70,34 +70,50 @@ require("config/lazy")
 vim.cmd([[colorscheme monokai-pro-classic]])
 require("codecompanion").setup({
 	adapters = {
+		http = {
+			SirNelkher = function()
+				return require("codecompanion.adapters").extend("ollama", {
+					name = "SirNelkher Ollama",
+					schema = {
+						model = {
+							default = "deepseek-coder-v2:16b",
+						},
+					},
+					env = {
+						url = "https://ollama.sirnelkher.net",
+						-- codecompanion's ollama get_models.lua rebuilds the Authorization header
+						-- itself as "<authorization> <api_key>" (defaulting to "Bearer") whenever
+						-- it fetches the model list, ignoring the `headers` table below. Override
+						-- the prefix here so that request uses "Basic" too, matching the proxy.
+						authorization = "Basic",
+						-- `pass` stores the raw "user:pass" string; HTTP Basic Auth needs it
+						-- base64-encoded. Works identically on macOS (brew install pass) and
+						-- Debian/Linux (apt install pass).
+						api_key = function()
+							local result = vim.system({ "pass", "show", "sirnelkher/ollama" }, { text = true }):wait()
+							if result.code ~= 0 then
+								vim.notify(
+									"[SirNelkher Ollama] `pass show sirnelkher/ollama` failed: "
+										.. vim.trim(result.stderr or "unknown error"),
+									vim.log.levels.ERROR
+								)
+								return ""
+							end
+							return vim.base64.encode(vim.trim(result.stdout or ""))
+						end,
+					},
+					headers = {
+						["Authorization"] = "Basic ${api_key}",
+					},
+				})
+			end,
+		},
 		opts = {
 			show_model_choices = false,
 		},
 		prompts = {
 			content = "",
 		},
-		SirNelkher = function()
-			return require("codecompanion.adapters").extend("ollama", {
-				name = "SirNelkher Ollama",
-				schema = {
-					model = {
-						default = "deepseek-coder-v2:16b",
-					},
-				},
-				env = {
-					url = "https://ollama.sirnelkher.net",
-					api_key = "Basic ",
-				},
-				headers = {
-					["Content-Type"] = "application/json",
-					["Authorization"] = "Basic ",
-					["request_timeout"] = "600",
-				},
-				parameters = {
-					sync = true,
-				},
-			})
-		end,
 	},
 	strategies = {
 		chat = {
